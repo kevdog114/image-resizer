@@ -1,6 +1,18 @@
 
 <h1>Image Resizer utility</h1>
-<em>Resizes images to 500px by 500px</em>
+<em>Resizes images to 500px by 500px</em> <br />
+<em>View project on <a href="https://github.com/kevdog114/image-resizer/tree/gh-pages">github</a>.</em> <br />
+<!--<select [(ngModel)]="selectedSize">
+  <option *ngFor="let op of sizeOptions" [value]="op.id">{{op.value}}</option>
+</select>-->
+<button class="btn" *ngFor="let op of sizeOptions" (click)="sizeButtonClick(op)" [class.active]="selectedSize == op.id">
+  {{op.value}}
+  <ng-container *ngIf="op.isCustom && op.resizeWidth > 0">
+    - {{op.resizeWidth}}x{{op.resizeHeight}}px
+  </ng-container>
+</button>
+<button class="btn" (click)="clearStorage()">Clear preferences</button>
+
 <div class="dropzone" appDnd (fileDropped)=onFileDropped($event)>
   <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
   <p>Drag and drop files here</p>
@@ -14,8 +26,8 @@
         {{ file?.File?.name }}
       </h4>
       <p class="size">
-        Size: {{ formatBytes(file?.File?.size) }} <br />
-        {{ file?.width }}px by {{file?.height}}px
+        {{ formatBytes(file?.File?.size) }} &rarr; {{formatBytes(file?.sizeNew )}} <br />
+        {{ file?.width }}x{{file?.height}}px &rarr; {{file?.widthNew}}x{{file?.heightNew}}px
       </p>
       <img style="height: 150px; width: 150px; margin: 0 auto; display: block;" [src]="file?.preview" /><br />
       <a [href]="file?.preview" [download]="file?.File?.name">Save resized image</a>
@@ -24,4 +36,3 @@
 </div>
 
 <router-outlet></router-outlet>
-

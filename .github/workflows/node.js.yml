@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build:prod
+    - run: npm run build-prod
     - run: npm deploy
       if: github.ref == 'refs/heads/main'

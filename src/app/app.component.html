@@ -1,6 +1,6 @@
 
 <h1>Image Resizer utility</h1>
-<em>Resizes images to 500px by 500px</em>
+<em>Resizes images. Select an image size preset first.</em>
 <div class="dropzone" appDnd (fileDropped)=onFileDropped($event)>
   <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
   <p>Drag and drop files here</p>
